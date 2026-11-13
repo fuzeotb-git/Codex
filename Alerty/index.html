@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10141b" />
+  <title>Alerty — инфраструктура под контролем</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview"><span class="brand-icon">A</span><span>Alerty<small>INFRASTRUCTURE</small></span></a>
+    <div class="workspace"><span class="workspace-dot"></span><span><b>Моя инфраструктура</b><small>Личный workspace</small></span><span class="chevron">⌄</span></div>
+    <div class="nav-label">МОНИТОРИНГ</div>
+    <nav>
+      <button class="nav-item active" data-page="overview"><span>▦</span> Обзор <kbd>1</kbd></button>
+      <button class="nav-item" data-page="servers"><span>▤</span> Серверы <i class="nav-count">3</i></button>
+      <button class="nav-item" data-page="logs"><span>≋</span> Живые логи</button>
+      <button class="nav-item" data-page="alerts"><span>◇</span> События <i class="alert-count">2</i></button>
+    </nav>
+    <div class="nav-label security-label">ДОСТУП И БЕЗОПАСНОСТЬ</div>
+    <nav><button class="nav-item" data-page="devices"><span>⌘</span> Доверенные устройства</button><button class="nav-item" data-page="audit"><span>☷</span> Журнал действий</button></nav>
+    <div class="sidebar-bottom"><div class="connection"><span class="pulse"></span><span><b>Демо-режим</b><small>Данные синтетические</small></span></div><div class="user"><div class="avatar">SI</div><span><b>Сергей Иванитский</b><small>Владелец</small></span><span class="more">···</span></div></div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar"><div class="crumb">Рабочая область <span>/</span> <b id="crumb-title">Обзор</b></div><div class="top-actions"><span class="demo-pill"><i></i> DEMO</span><button class="icon-btn" title="Поиск">⌕</button><button class="icon-btn notification" title="Уведомления">♧<i></i></button><div class="avatar small-avatar">SI</div></div></header>
+    <div class="content">
+      <section class="welcome-row"><div><div class="eyebrow">ПЯТНИЦА, 13 НОЯБРЯ 2026 <span class="live-dot"></span> ОБНОВЛЯЕТСЯ</div><h1 id="page-title">Всё под контролем<span>.</span></h1><p class="subtitle">Состояние инфраструктуры в реальном времени.</p></div><button class="range-btn">Последний час <span>⌄</span></button></section>
+      <section class="summary-grid">
+        <article class="summary-card"><div class="card-top"><span>СЕРВЕРЫ</span><span class="tiny-icon blue">▤</span></div><div class="metric-line"><strong>3</strong><span class="status-good">● Все на связи</span></div><div class="card-foot"><span>2 Linux · 1 Windows</span><span class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></article>
+        <article class="summary-card"><div class="card-top"><span>СЕРВИСЫ</span><span class="tiny-icon purple">◈</span></div><div class="metric-line"><strong>12<span class="muted-number">/12</span></strong><span class="status-good">● Работают</span></div><div class="card-foot"><span>Docker · systemd</span><span class="service-dots">● ● ● ● ● ● ● ● ● ● ● ●</span></div></article>
+        <article class="summary-card"><div class="card-top"><span>ОПОВЕЩЕНИЯ</span><span class="tiny-icon orange">◇</span></div><div class="metric-line"><strong>2</strong><span class="status-warn">● Требуют внимания</span></div><div class="card-foot"><span>1 предупреждение · 1 информация</span><span class="alert-spark">⌁⌁⌁</span></div></article>
+        <article class="summary-card"><div class="card-top"><span>СОБЫТИЯ ЗА ЧАС</span><span class="tiny-icon green">≋</span></div><div class="metric-line"><strong id="event-count">248</strong><span class="status-neutral">лог-записей</span></div><div class="card-foot"><span>Ошибок: <b class="error-text" id="error-count">3</b></span><span class="event-spark">⌁⌁⌁</span></div></article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="panel chart-panel"><div class="panel-head"><div><h2>Ресурсы системы</h2><p>Среднее по всем серверам</p></div><button class="select-mini">Все серверы <span>⌄</span></button></div><div class="chart-legend"><span><i class="legend-cpu"></i> CPU <b id="cpu-label">34%</b></span><span><i class="legend-ram"></i> RAM <b id="ram-label">62%</b></span><span class="chart-live"><i></i> LIVE</span></div><div class="chart-wrap"><div class="y-labels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><svg class="chart" viewBox="0 0 700 190" preserveAspectRatio="none" aria-label="График нагрузки"><defs><linearGradient id="cpuFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#59a6ff" stop-opacity=".22"/><stop offset="1" stop-color="#59a6ff" stop-opacity="0"/></linearGradient></defs><g class="grid-lines"><path d="M0 8H700M0 52H700M0 96H700M0 140H700M0 184H700"/></g><path id="cpu-area" class="cpu-area" d=""/><path id="cpu-line" class="cpu-line" d=""/><path id="ram-line" class="ram-line" d=""/></svg></div><div class="x-labels"><span>10:00</span><span>10:15</span><span>10:30</span><span>10:45</span><span>11:00</span></div></article>
+        <article class="panel health-panel"><div class="panel-head"><div><h2>Здоровье системы</h2><p>Среднее за последние 5 минут</p></div><button class="more-btn">···</button></div><div class="health-ring"><div class="ring"><div><strong>98<span>%</span></strong><small>ОТЛИЧНО</small></div></div></div><div class="health-list"><div><span><i class="health-blue"></i>Доступность</span><b>99.98%</b></div><div><span><i class="health-green"></i>Пинг</span><b>24 мс</b></div><div><span><i class="health-purple"></i>Ошибки</span><b>0.02%</b></div></div></article>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel server-panel"><div class="panel-head"><div><h2>Серверы и сервисы</h2><p>3 узла · 12 работающих сервисов</p></div><button class="text-btn" data-goto="servers">Все серверы <span>→</span></button></div><div class="server-list" id="server-list"></div></article>
+        <article class="panel logs-panel"><div class="panel-head"><div><h2>Поток событий</h2><p>Последние записи из инфраструктуры</p></div><button class="text-btn" data-goto="logs">Все логи <span>→</span></button></div><div class="log-stream" id="log-stream"></div><div class="stream-foot"><span class="stream-live"><i></i> ПОТОК АКТИВЕН</span><button data-goto="logs">Открыть консоль →</button></div></article>
+      </section>
+      <footer class="page-foot"><span>Alerty <b>0.0.1a</b> · локальная демонстрация</span><span>Защищённое соединение <i>●</i></span></footer>
+    </div>
+  </main>
+  <div class="toast" id="toast"></div>
+  <dialog id="action-dialog"><div class="dialog-icon">↻</div><h3 id="dialog-title">Перезапустить сервис?</h3><p id="dialog-copy">Сервис будет кратковременно недоступен.</p><div class="dialog-actions"><button class="cancel-btn" id="cancel-action">Отмена</button><button class="confirm-btn" id="confirm-action">Подтвердить действие</button></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
+
