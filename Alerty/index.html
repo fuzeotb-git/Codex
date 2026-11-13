@@ -16,6 +16,7 @@
       <button class="nav-item active" data-page="overview"><span>▦</span> Обзор <kbd>1</kbd></button>
       <button class="nav-item" data-page="servers"><span>▤</span> Серверы <i class="nav-count">3</i></button>
       <button class="nav-item" data-page="services"><span>◈</span> Сервисы <i class="nav-count">12</i></button>
+      <button class="nav-item" data-page="metrics"><span>⌁</span> Метрики</button>
       <button class="nav-item" data-page="logs"><span>≋</span> Живые логи</button>
       <button class="nav-item" data-page="alerts"><span>◇</span> События <i class="alert-count">2</i></button>
     </nav>
@@ -27,7 +28,7 @@
   <main class="main" id="overview">
     <header class="topbar"><div class="crumb">Рабочая область <span>/</span> <b id="crumb-title">Обзор</b></div><div class="top-actions"><span class="demo-pill"><i></i> DEMO</span><button class="icon-btn" title="Поиск">⌕</button><button class="icon-btn notification" title="Уведомления">♧<i></i></button><div class="avatar small-avatar">SI</div></div></header>
     <div class="content">
-      <section class="welcome-row"><div><div class="eyebrow">ALERTY 0.0.1b <span class="live-dot"></span> ОБНОВЛЯЕТСЯ</div><h1 id="page-title">Всё под контролем<span>.</span></h1><p class="subtitle">Состояние инфраструктуры в реальном времени.</p></div><button class="range-btn">Последний час <span>⌄</span></button></section>
+      <section class="welcome-row"><div><div class="eyebrow">ALERTY 0.0.1c <span class="live-dot"></span> ОБНОВЛЯЕТСЯ</div><h1 id="page-title">Всё под контролем<span>.</span></h1><p class="subtitle">Состояние инфраструктуры в реальном времени.</p></div><button class="range-btn">Последний час <span>⌄</span></button></section>
       <section class="summary-grid">
         <article class="summary-card"><div class="card-top"><span>СЕРВЕРЫ</span><span class="tiny-icon blue">▤</span></div><div class="metric-line"><strong>3</strong><span class="status-good">● Все на связи</span></div><div class="card-foot"><span>2 Linux · 1 Windows</span><span class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></article>
         <article class="summary-card"><div class="card-top"><span>СЕРВИСЫ</span><span class="tiny-icon purple">◈</span></div><div class="metric-line"><strong>12<span class="muted-number">/12</span></strong><span class="status-good">● Работают</span></div><div class="card-foot"><span>Docker · systemd</span><span class="service-dots">● ● ● ● ● ● ● ● ● ● ● ●</span></div></article>
@@ -57,6 +58,18 @@
         <div class="devices-heading"><div><div class="eyebrow">КАТАЛОГ И УПРАВЛЕНИЕ</div><h1>Сервисы<span>.</span></h1><p class="subtitle">Контейнеры и службы, обнаруженные на подключённых узлах.</p></div><span class="demo-pill"><i></i> 12 ДЕМО-СЕРВИСОВ</span></div>
         <div class="security-note service-note"><span>✦</span><div><b>Как работает закрепление</b><p>Закрепляй звёздочкой нужные сервисы. Alerty показывает их на главной, сохраняя привязку к конкретному серверу. Перезапуск доступен из каталога и требует подтверждения.</p></div></div>
         <article class="panel services-catalog"><div class="catalog-toolbar"><div class="catalog-tabs"><button class="catalog-tab selected" data-filter="all">Все <b>12</b></button><button class="catalog-tab" data-filter="docker">Docker <b>8</b></button><button class="catalog-tab" data-filter="systemd">systemd <b>4</b></button></div><label class="search-box">⌕<input id="service-search" placeholder="Найти сервис…" /></label></div><div class="catalog-head"><span>СЕРВИС</span><span>УЗЕЛ</span><span>ТИП</span><span>СТАТУС</span><span>CPU / RAM</span><span>ДЕЙСТВИЯ</span></div><div id="service-list"></div></article>
+      </section>
+      <section id="metrics-view" class="metrics-view" hidden>
+        <div class="devices-heading"><div><div class="eyebrow">МОНИТОРИНГ РЕСУРСОВ <span class="live-dot"></span> LIVE</div><h1>Метрики<span>.</span></h1><p class="subtitle">Сравнение нагрузки на всех серверах в одной шкале времени.</p></div><button class="range-btn">Последний час <span>⌄</span></button></div>
+        <article class="panel metrics-panel">
+          <div class="metric-tabs" role="tablist" aria-label="Ресурс для отображения"><button class="metric-tab selected" role="tab" aria-selected="true" data-metric="cpu"><span class="metric-tab-icon cpu-icon">▥</span><span><small>ПРОЦЕССОР</small><b>CPU</b></span><strong id="metric-cpu-value">34%</strong></button><button class="metric-tab" role="tab" aria-selected="false" data-metric="ram"><span class="metric-tab-icon ram-icon">▦</span><span><small>ПАМЯТЬ</small><b>RAM</b></span><strong id="metric-ram-value">61%</strong></button><button class="metric-tab" role="tab" aria-selected="false" data-metric="load"><span class="metric-tab-icon load-icon">⌁</span><span><small>НАГРУЗКА ОС</small><b>Load Average</b></span><strong id="metric-load-value">1.42</strong></button></div>
+          <div class="metrics-chart-head"><div><h2 id="metric-chart-title">Загрузка процессора</h2><p id="metric-chart-subtitle">Использование CPU по каждому серверу</p></div><span class="chart-live"><i></i> ОБНОВЛЕНИЕ КАЖДЫЕ 2 СЕК</span></div>
+          <div class="metrics-legend" id="metrics-legend"></div>
+          <div class="full-chart-wrap"><div class="full-y-labels" id="metric-y-labels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><svg class="full-chart" viewBox="0 0 1000 360" preserveAspectRatio="none" aria-label="Графики метрик серверов"><g class="full-grid"><path d="M0 8H1000M0 94H1000M0 180H1000M0 266H1000M0 352H1000"/></g><path id="metric-line-0" class="metric-series series-blue"/><path id="metric-line-1" class="metric-series series-purple"/><path id="metric-line-2" class="metric-series series-green"/></svg></div>
+          <div class="full-x-labels"><span>10:00</span><span>10:15</span><span>10:30</span><span>10:45</span><span>11:00</span></div>
+          <div class="metrics-server-summary" id="metrics-server-summary"></div>
+        </article>
+        <p class="metrics-demo-note">Показаны демонстрационные значения. Подключение Prometheus добавит реальные временные ряды для узлов.</p>
       </section>
     </div>
   </main>
