@@ -15,6 +15,7 @@
     <nav>
       <button class="nav-item active" data-page="overview"><span>▦</span> Обзор <kbd>1</kbd></button>
       <button class="nav-item" data-page="servers"><span>▤</span> Серверы <i class="nav-count">3</i></button>
+      <button class="nav-item" data-page="services"><span>◈</span> Сервисы <i class="nav-count">12</i></button>
       <button class="nav-item" data-page="logs"><span>≋</span> Живые логи</button>
       <button class="nav-item" data-page="alerts"><span>◇</span> События <i class="alert-count">2</i></button>
     </nav>
@@ -26,7 +27,7 @@
   <main class="main" id="overview">
     <header class="topbar"><div class="crumb">Рабочая область <span>/</span> <b id="crumb-title">Обзор</b></div><div class="top-actions"><span class="demo-pill"><i></i> DEMO</span><button class="icon-btn" title="Поиск">⌕</button><button class="icon-btn notification" title="Уведомления">♧<i></i></button><div class="avatar small-avatar">SI</div></div></header>
     <div class="content">
-      <section class="welcome-row"><div><div class="eyebrow">ПЯТНИЦА, 13 НОЯБРЯ 2026 <span class="live-dot"></span> ОБНОВЛЯЕТСЯ</div><h1 id="page-title">Всё под контролем<span>.</span></h1><p class="subtitle">Состояние инфраструктуры в реальном времени.</p></div><button class="range-btn">Последний час <span>⌄</span></button></section>
+      <section class="welcome-row"><div><div class="eyebrow">ALERTY 0.0.1b <span class="live-dot"></span> ОБНОВЛЯЕТСЯ</div><h1 id="page-title">Всё под контролем<span>.</span></h1><p class="subtitle">Состояние инфраструктуры в реальном времени.</p></div><button class="range-btn">Последний час <span>⌄</span></button></section>
       <section class="summary-grid">
         <article class="summary-card"><div class="card-top"><span>СЕРВЕРЫ</span><span class="tiny-icon blue">▤</span></div><div class="metric-line"><strong>3</strong><span class="status-good">● Все на связи</span></div><div class="card-foot"><span>2 Linux · 1 Windows</span><span class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></article>
         <article class="summary-card"><div class="card-top"><span>СЕРВИСЫ</span><span class="tiny-icon purple">◈</span></div><div class="metric-line"><strong>12<span class="muted-number">/12</span></strong><span class="status-good">● Работают</span></div><div class="card-foot"><span>Docker · systemd</span><span class="service-dots">● ● ● ● ● ● ● ● ● ● ● ●</span></div></article>
@@ -39,16 +40,23 @@
         <article class="panel health-panel"><div class="panel-head"><div><h2>Здоровье системы</h2><p>Среднее за последние 5 минут</p></div><button class="more-btn">···</button></div><div class="health-ring"><div class="ring"><div><strong>98<span>%</span></strong><small>ОТЛИЧНО</small></div></div></div><div class="health-list"><div><span><i class="health-blue"></i>Доступность</span><b>99.98%</b></div><div><span><i class="health-green"></i>Пинг</span><b>24 мс</b></div><div><span><i class="health-purple"></i>Ошибки</span><b>0.02%</b></div></div></article>
       </section>
 
+      <section class="panel pinned-panel"><div class="panel-head"><div><h2>Закреплённые сервисы</h2><p>Быстрый доступ к важным сервисам · закрепления хранятся в этом браузере</p></div><button class="text-btn" data-goto="services">Управлять сервисами <span>→</span></button></div><div id="pinned-services" class="pinned-services"></div></section>
+
       <section class="lower-grid">
         <article class="panel server-panel"><div class="panel-head"><div><h2>Серверы и сервисы</h2><p>3 узла · 12 работающих сервисов</p></div><button class="text-btn" data-goto="servers">Все серверы <span>→</span></button></div><div class="server-list" id="server-list"></div></article>
         <article class="panel logs-panel"><div class="panel-head"><div><h2>Поток событий</h2><p>Последние записи из инфраструктуры</p></div><button class="text-btn" data-goto="logs">Все логи <span>→</span></button></div><div class="log-stream" id="log-stream"></div><div class="stream-foot"><span class="stream-live"><i></i> ПОТОК АКТИВЕН</span><button data-goto="logs">Открыть консоль →</button></div></article>
       </section>
-      <footer class="page-foot"><span>Alerty <b>0.0.1a</b> · локальная демонстрация</span><span>Защищённое соединение <i>●</i></span></footer>
+      <footer class="page-foot"><span>Alerty <b>0.0.1b</b> · локальная демонстрация</span><span>Защищённое соединение <i>●</i></span></footer>
       <section id="devices-view" class="devices-view" hidden>
         <div class="devices-heading"><div><div class="eyebrow">УПРАВЛЕНИЕ ДОСТУПОМ</div><h1>Доверенные устройства<span>.</span></h1><p class="subtitle">Устройства, которым разрешён вход в панель Alerty.</p></div><button class="primary-btn" id="add-device">＋ Добавить устройство</button></div>
         <div class="security-note"><span>✦</span><div><b>Устройство подтверждается криптографическим ключом</b><p>MAC-адрес виден только в локальной сети и может быть подменён. Здесь он служит справочной меткой, а не защитой доступа извне.</p></div></div>
         <article class="panel trusted-panel"><div class="panel-head"><div><h2>Разрешённые устройства</h2><p id="device-total">2 устройства · последний вход только что</p></div><span class="trusted-badge">● ЗАЩИЩЕНО PASSKEY</span></div><div id="device-list" class="device-list"></div></article>
         <article class="panel device-activity"><div class="panel-head"><div><h2>Последние попытки входа</h2><p>Активность за последние 24 часа</p></div></div><div class="attempt-row"><span class="attempt-icon success">✓</span><span><b>Успешный вход</b><small>Этот браузер · Passkey</small></span><time>Сейчас</time><em>Разрешено</em></div><div class="attempt-row"><span class="attempt-icon blocked">!</span><span><b>Новое устройство</b><small>Подтверждение не пройдено</small></span><time>Вчера, 22:41</time><em class="blocked-text">Отклонено</em></div></article>
+      </section>
+      <section id="services-view" class="services-view" hidden>
+        <div class="devices-heading"><div><div class="eyebrow">КАТАЛОГ И УПРАВЛЕНИЕ</div><h1>Сервисы<span>.</span></h1><p class="subtitle">Контейнеры и службы, обнаруженные на подключённых узлах.</p></div><span class="demo-pill"><i></i> 12 ДЕМО-СЕРВИСОВ</span></div>
+        <div class="security-note service-note"><span>✦</span><div><b>Как работает закрепление</b><p>Закрепляй звёздочкой нужные сервисы. Alerty показывает их на главной, сохраняя привязку к конкретному серверу. Перезапуск доступен из каталога и требует подтверждения.</p></div></div>
+        <article class="panel services-catalog"><div class="catalog-toolbar"><div class="catalog-tabs"><button class="catalog-tab selected" data-filter="all">Все <b>12</b></button><button class="catalog-tab" data-filter="docker">Docker <b>8</b></button><button class="catalog-tab" data-filter="systemd">systemd <b>4</b></button></div><label class="search-box">⌕<input id="service-search" placeholder="Найти сервис…" /></label></div><div class="catalog-head"><span>СЕРВИС</span><span>УЗЕЛ</span><span>ТИП</span><span>СТАТУС</span><span>CPU / RAM</span><span>ДЕЙСТВИЯ</span></div><div id="service-list"></div></article>
       </section>
     </div>
   </main>
