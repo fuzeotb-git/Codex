@@ -44,10 +44,17 @@
         <article class="panel logs-panel"><div class="panel-head"><div><h2>Поток событий</h2><p>Последние записи из инфраструктуры</p></div><button class="text-btn" data-goto="logs">Все логи <span>→</span></button></div><div class="log-stream" id="log-stream"></div><div class="stream-foot"><span class="stream-live"><i></i> ПОТОК АКТИВЕН</span><button data-goto="logs">Открыть консоль →</button></div></article>
       </section>
       <footer class="page-foot"><span>Alerty <b>0.0.1a</b> · локальная демонстрация</span><span>Защищённое соединение <i>●</i></span></footer>
+      <section id="devices-view" class="devices-view" hidden>
+        <div class="devices-heading"><div><div class="eyebrow">УПРАВЛЕНИЕ ДОСТУПОМ</div><h1>Доверенные устройства<span>.</span></h1><p class="subtitle">Устройства, которым разрешён вход в панель Alerty.</p></div><button class="primary-btn" id="add-device">＋ Добавить устройство</button></div>
+        <div class="security-note"><span>✦</span><div><b>Устройство подтверждается криптографическим ключом</b><p>MAC-адрес виден только в локальной сети и может быть подменён. Здесь он служит справочной меткой, а не защитой доступа извне.</p></div></div>
+        <article class="panel trusted-panel"><div class="panel-head"><div><h2>Разрешённые устройства</h2><p id="device-total">2 устройства · последний вход только что</p></div><span class="trusted-badge">● ЗАЩИЩЕНО PASSKEY</span></div><div id="device-list" class="device-list"></div></article>
+        <article class="panel device-activity"><div class="panel-head"><div><h2>Последние попытки входа</h2><p>Активность за последние 24 часа</p></div></div><div class="attempt-row"><span class="attempt-icon success">✓</span><span><b>Успешный вход</b><small>Этот браузер · Passkey</small></span><time>Сейчас</time><em>Разрешено</em></div><div class="attempt-row"><span class="attempt-icon blocked">!</span><span><b>Новое устройство</b><small>Подтверждение не пройдено</small></span><time>Вчера, 22:41</time><em class="blocked-text">Отклонено</em></div></article>
+      </section>
     </div>
   </main>
   <div class="toast" id="toast"></div>
   <dialog id="action-dialog"><div class="dialog-icon">↻</div><h3 id="dialog-title">Перезапустить сервис?</h3><p id="dialog-copy">Сервис будет кратковременно недоступен.</p><div class="dialog-actions"><button class="cancel-btn" id="cancel-action">Отмена</button><button class="confirm-btn" id="confirm-action">Подтвердить действие</button></div></dialog>
+  <dialog id="device-dialog"><div class="dialog-icon">⌘</div><h3>Добавить доверенное устройство</h3><p>В настоящей версии устройство будет подтверждено passkey. MAC-адрес необязателен и используется как заметка для локальной сети.</p><label class="field-label">Название<input id="device-name" placeholder="Например, рабочий ноутбук" /></label><label class="field-label">MAC-адрес, необязательно<input id="device-mac" placeholder="AA:BB:CC:DD:EE:FF" maxlength="17" /></label><div class="dialog-actions"><button class="cancel-btn" id="cancel-device">Отмена</button><button class="confirm-btn" id="save-device">Добавить</button></div></dialog>
   <script src="app.js"></script>
 </body>
 </html>
