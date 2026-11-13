@@ -5,11 +5,11 @@ services:
     restart: unless-stopped
     environment:
       PORT: 8080
-      PROMETHEUS_URL: ${PROMETHEUS_URL:-}
+      PROMETHEUS_URL: ${PROMETHEUS_URL:-http://prometheus:9090}
       PROMETHEUS_TOKEN: ${PROMETHEUS_TOKEN:-}
       PROMETHEUS_USER: ${PROMETHEUS_USER:-}
       PROMETHEUS_PASSWORD: ${PROMETHEUS_PASSWORD:-}
-      LOKI_URL: ${LOKI_URL:-}
+      LOKI_URL: ${LOKI_URL:-http://loki:3100}
       LOKI_TOKEN: ${LOKI_TOKEN:-}
       LOKI_USER: ${LOKI_USER:-}
       LOKI_PASSWORD: ${LOKI_PASSWORD:-}
@@ -23,4 +23,39 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+
+  prometheus:
+    image: prom/prometheus:v3.13.3
+    container_name: alerty-prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=30d
+      - --web.enable-lifecycle
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/targets:/etc/prometheus/targets:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    security_opt:
+      - no-new-privileges:true
+
+  loki:
+    image: grafana/loki:3.7.0
+    container_name: alerty-loki
+    restart: unless-stopped
+    command: ["-config.file=/etc/loki/loki-config.yaml"]
+    volumes:
+      - ./monitoring/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki-data:/loki
+    ports:
+      - "127.0.0.1:3100:3100"
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  prometheus-data:
+  loki-data:
 

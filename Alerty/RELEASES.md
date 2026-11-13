@@ -1,5 +1,14 @@
 # Релизы Alerty
 
+## 0.0.2b — стек мониторинга для Proxmox
+
+- Compose теперь поднимает Alerty вместе с Prometheus и Loki.
+- Prometheus targets пока пусты; предусмотрен file-based список узлов.
+- Loki использует постоянное хранилище и ограничение хранения логов до 14 дней.
+- Добавлены примеры Alloy для Linux/Windows Event Log и Nginx Basic Auth/TLS вход для log shipping.
+- Добавлена инструкция, как развернуть стек в отдельной VM Proxmox и подготовить WireGuard.
+- Реальные метрики и логи появятся после сетевой инвентаризации и установки exporters/Alloy на целевые машины.
+
 ## 0.0.2a — настройка подключений
 
 - Добавлен контейнерный Node.js-шлюз с проверкой Prometheus и Loki и прокси их query API.

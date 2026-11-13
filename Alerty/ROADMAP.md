@@ -1,5 +1,14 @@
 # План развития Alerty
 
+## 0.0.2b — локальный стек для домашней лабы
+
+- [x] Добавить Compose-сервисы Prometheus и Loki с persistent storage.
+- [x] Добавить безопасные локальные привязки портов, пустой file-discovery список targets и конфигурацию retention.
+- [x] Подготовить Alloy шаблоны для Linux/Windows и защищённый Nginx ingest route.
+- [x] Описать размещение в отдельной Proxmox VM и WireGuard схему.
+- [ ] Определить ОС, IP/подсеть и сетевой путь до трёх узлов; затем установить exporters/Alloy.
+- [ ] Подключить реальные ряды Prometheus и логи Loki к Alerty UI и сверить имена labels.
+
 ## 0.0.2a — каналы подключения
 
 - [x] Добавить Node.js API-шлюз к заранее заданным Prometheus/Loki URL.

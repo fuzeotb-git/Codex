@@ -1,0 +1,19 @@
+loki.write "central" {
+  endpoint {
+    // URL points to the TLS-enabled Nginx endpoint, never directly to public Loki.
+    url = sys.env("LOKI_PUSH_URL")
+    basic_auth {
+      username = sys.env("LOKI_USERNAME")
+      password = sys.env("LOKI_PASSWORD")
+    }
+  }
+}
+
+loki.source.journal "system" {
+  forward_to = [loki.write.central.receiver]
+  labels = {
+    host = sys.env("ALERTY_NODE_NAME"),
+    job  = "systemd-journal",
+  }
+}
+

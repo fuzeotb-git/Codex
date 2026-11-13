@@ -1,0 +1,15 @@
+[
+  {
+    "targets": ["192.168.1.101:9100"],
+    "labels": { "host": "server-1", "os": "linux" }
+  },
+  {
+    "targets": ["192.168.1.102:9100"],
+    "labels": { "host": "server-2", "os": "linux" }
+  },
+  {
+    "targets": ["192.168.1.103:9100"],
+    "labels": { "host": "server-3", "os": "linux" }
+  }
+]
+
