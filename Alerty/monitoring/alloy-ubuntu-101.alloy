@@ -1,0 +1,13 @@
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+loki.source.journal "ubuntu_101" {
+  forward_to = [loki.write.local.receiver]
+  labels = {
+    host = "ubuntu-101",
+    job  = "systemd-journal",
+  }
+}

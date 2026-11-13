@@ -1,2 +1,6 @@
-[]
-
+[
+  {
+    "targets": ["node-exporter:9100"],
+    "labels": { "host": "ubuntu-101", "os": "linux" }
+  }
+]
